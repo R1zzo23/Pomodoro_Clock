@@ -17,13 +17,80 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
     <script>
+    var timeLength;
+    var timeToWork;
+    var timerRunning = false;
+    var onBreak = false;
+    var workTimer = 25;
+    var breakTimer = 5;
+    minutes = 00;
+    seconds = 12;
+
+    $(document).ready(function() {
+      document.getElementById("startButton").disabled = false;
+      document.getElementById("stopButton").disabled = true;
+    });
+
+    function startTimer(){
+
+      document.getElementById("startButton").disabled = true;
+      document.getElementById("stopButton").disabled = false;
+
+      var timer = setInterval(function() {
+
+        if (minutes >= 10 && seconds >=10)
+          document.getElementById("clock").innerHTML = minutes + ":" + seconds;
+        if (minutes < 10)
+          document.getElementById("clock").innerHTML = "0" + minutes + ":" + seconds;
+        if (eval(seconds) < 10) {
+          document.getElementById("clock").innerHTML = minutes + ":0" + seconds;
+        }
+        if (minutes < 10 && seconds < 10)
+          document.getElementById("clock").innerHTML = "0" + minutes + ":0" + seconds;
+
+        if (seconds > 0) {
+          seconds--;
+        }
+        else if (seconds == 0 || seconds == 00) {
+          if (minutes > 0) {
+            minutes--;
+            seconds = 59;
+          }
+          else {
+            if (!onBreak) {
+              alert("Time for a quick break!");
+              minutes = breakTimer;
+              onBreak = true;
+            }
+            else if (onBreak){
+              alert("Time to get back to work!");
+              minutes = workTimer;
+              onBreak = false;
+            }
+          }
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      document.getElementById("startButton").disabled = false;
+      document.getElementById("stopButton").disabled = true;
+
+      clearInterval(timer);
+    }
 
     </script>
   </head>
 
   <body>
     <div class="container-fluid"> <!-- Beginning of Container -->
-
+      <div class="row">
+        <div class="col-xs-12">
+          <button id="startButton" onclick="startTimer()">START</button><button id="stopButton" onclick="stopTimer()">STOP</button>
+          <p>Work Timer = 25 minutes, Break Timer = 5 minutes</p>
+          <p id="clock"></p>
+        </div>
+      </div>
     </div> <!-- End of Container -->
 
   </body>
