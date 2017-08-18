@@ -23,8 +23,8 @@
     var onBreak = false;
     var workTimer = 25;
     var breakTimer = 5;
-    minutes;
-    seconds;
+    minutes = 25;
+    seconds = 0;
 
     $(document).ready(function() {
       document.getElementById("startButton").disabled = false;
@@ -147,7 +147,7 @@
     </script>
   </head>
 
-  <body ontouchstart=""s>
+  <body ontouchstart="">
     <div class="container-fluid"> <!-- Beginning of Container -->
       <div class="row">
         <div class="col-xs-12">
@@ -175,11 +175,13 @@
               <tr>
                 <td colspan=6><img width="350em" height="250em" id="picture" src="images/pause.jpg"/></td>
               </tr>
+              <tr>
+                <td id="wikiLink" colspan=6>If you want to read more about the Pomodoro Technique, click <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">HERE</a>.</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div> <!-- End of Container -->
-
   </body>
 </html>

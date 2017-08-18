@@ -43,3 +43,8 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+#wikiLink {
+  font-size: .8em;
+  font-style: italic;
+}
