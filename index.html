@@ -16,13 +16,15 @@
     <link rel=StyleSheet href="custom.css" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+    <!-- Clock Font -->
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <script>
 
-    var onBreak = true;
+    var onBreak = false;
     var workTimer = 25;
     var breakTimer = 5;
-    minutes = 00;
-    seconds = 12;
+    minutes;
+    seconds;
 
     $(document).ready(function() {
       document.getElementById("startButton").disabled = false;
@@ -49,6 +51,7 @@
       if (workTimer == 1) {
         document.getElementById('workTimerLess').disabled = true;
       }
+      setInitialClock();
     }
     function workTimerMore (){
       workTimer++;
@@ -56,9 +59,32 @@
       if (workTimer >= 2) {
         document.getElementById('workTimerLess').disabled = false;
       }
+      setInitialClock();
+    }
+
+    function setInitialClock() {
+      if (workTimer >= 10) {
+        document.getElementById('clock').innerHTML = workTimer + ":00";
+      }
+      else {
+        document.getElementById('clock').innerHTML = "0" + workTimer + ":00";
+      }
+      minutes = workTimer;
+      seconds = 0;
     }
 
     function startTimer(){
+      document.getElementById('breakTimerLess').disabled = true;
+      document.getElementById('breakTimerMore').disabled = true;
+      document.getElementById('workTimerLess').disabled = true;
+      document.getElementById('workTimerMore').disabled = true;
+
+      if (onBreak) {
+        $("#picture").attr("src","images/break.jpg");
+      }
+      else {
+        $("#picture").attr("src","images/working.jpg");
+      }
       var btnStop = document.getElementById("stopButton");
 
       document.getElementById("startButton").disabled = true;
@@ -66,15 +92,23 @@
 
       var timer = setInterval(function() {
 
-        if (minutes >= 10 && seconds >=10)
+
+        if (minutes >= 10 && seconds >=10) {
           document.getElementById("clock").innerHTML = minutes + ":" + seconds;
-        if (minutes < 10)
+          document.title = "(" + minutes + ":" + seconds + ") Pomodoro Productivity";
+        }
+        if (minutes < 10) {
           document.getElementById("clock").innerHTML = "0" + minutes + ":" + seconds;
+          document.title = "(0" + minutes + ":" + seconds + ") Pomodoro Productivity";
+        }
         if (eval(seconds) < 10) {
           document.getElementById("clock").innerHTML = minutes + ":0" + seconds;
+          document.title = "(" + minutes + ":0" + seconds + ") Pomodoro Productivity";
         }
-        if (minutes < 10 && seconds < 10)
+        if (minutes < 10 && seconds < 10) {
           document.getElementById("clock").innerHTML = "0" + minutes + ":0" + seconds;
+          document.title = "(0" + minutes + ":0" + seconds + ") Pomodoro Productivity";
+        }
 
         if (seconds > 0) {
           seconds--;
@@ -86,14 +120,14 @@
           }
           else {
             if (!onBreak) {
-              alert("Time for a quick break!");
               minutes = breakTimer;
               onBreak = true;
+              $("#picture").attr("src","images/break.jpg");
             }
             else if (onBreak){
-              alert("Time to get back to work!");
               minutes = workTimer;
               onBreak = false;
+              $("#picture").attr("src","images/working.jpg");
             }
           }
         }
@@ -103,6 +137,11 @@
         document.getElementById("startButton").disabled = false;
         document.getElementById("stopButton").disabled = true;
         clearInterval(timer);
+        $("#picture").attr("src","images/pause.jpg");
+        document.getElementById('breakTimerLess').disabled = false;
+        document.getElementById('breakTimerMore').disabled = false;
+        document.getElementById('workTimerLess').disabled = false;
+        document.getElementById('workTimerMore').disabled = false;
       }
     }
     </script>
@@ -112,27 +151,32 @@
     <div class="container-fluid"> <!-- Beginning of Container -->
       <div class="row">
         <div class="col-xs-12">
-          <table>
+          <table class="text-center">
             <tbody>
               <tr>
+                <td colspan=6 id="clock">25:00</td>
+              </tr>
+              <tr id="timerTitles">
                 <td colspan=3>Break Timer</td>
                 <td colspan=3>Work Timer</td>
               </tr>
               <tr>
-                <td><button id="breakTimerLess" onclick="breakTimerLess()">&#9660;</button></td>
-                <td id="breakTimeAmount">5</td>
-                <td><button id="breakTimerMore" onclick="breakTimerMore()">&#9650;</button></td>
-                <td><button id="workTimerLess" onclick="workTimerLess()">&#9660;</button></td>
-                <td id=workTimeAmount>25</td>
-                <td><button id="workTimerMore" onclick='workTimerMore()'>&#9650;</button></td>
+                <td style="width:10%"><button class="setup" id="breakTimerLess" onclick="breakTimerLess()">&#9660;</button></td>
+                <td style="width:30%" class="timeAmounts" id="breakTimeAmount">5</td>
+                <td style="width:10%"><button class="setup" id="breakTimerMore" onclick="breakTimerMore()">&#9650;</button></td>
+                <td style="width:10%"><button class="setup" id="workTimerLess" onclick="workTimerLess()">&#9660;</button></td>
+                <td style="width:30%" class="timeAmounts" id=workTimeAmount>25</td>
+                <td style="width:10%"><button class="setup" id="workTimerMore" onclick='workTimerMore()'>&#9650;</button></td>
               </tr>
               <tr>
                 <td colspan=3><button style="width:100%" id="startButton" onclick="startTimer()">START</button></td>
                 <td colspan=3><button style="width:100%" id="stopButton">STOP</button></td>
               </tr>
+              <tr>
+                <td colspan=6><img width="350em" height="250em" id="picture" src="images/pause.jpg"/></td>
+              </tr>
             </tbody>
           </table>
-          <p id="clock"></p>
         </div>
       </div>
     </div> <!-- End of Container -->

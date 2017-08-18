@@ -1,0 +1,41 @@
+#clock {
+  font-size: 7em;
+  font-family: 'Orbitron', sans-serif;
+}
+
+#timerTitles {
+  font-size: 1em;
+  font-family: 'Orbitron', sans-serif;
+}
+
+table tr td {
+  border-style: solid;
+}
+
+.timeAmounts {
+  font-size: 4em;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.setup {
+  font-size: 1em;
+}
+
+button {
+  border-radius: 1em;
+  background-color: #b3b3b3;
+  box-shadow: .2em .2em .1em black;
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+button:active {
+  background-color: #3b3938;
+  color: white;
+  box-shadow: 0em 0em 0em black;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
