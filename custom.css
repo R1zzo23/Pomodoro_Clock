@@ -23,6 +23,7 @@ table tr td {
 
 .setup {
   font-size: 1em;
+  box-shadow: .1em .1em .05em black;
 }
 
 button {
