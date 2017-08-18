@@ -1,3 +1,7 @@
+body {
+  margin-top: .25em;
+}
+
 #clock {
   font-size: 7em;
   font-family: 'Orbitron', sans-serif;
