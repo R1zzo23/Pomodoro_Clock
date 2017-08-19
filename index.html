@@ -74,25 +74,30 @@
     }
 
     function startTimer(){
+      //disable buttons to increase/decrease timers
       document.getElementById('breakTimerLess').disabled = true;
       document.getElementById('breakTimerMore').disabled = true;
       document.getElementById('workTimerLess').disabled = true;
       document.getElementById('workTimerMore').disabled = true;
 
+      //set timer picture based on break/working
       if (onBreak) {
-        $("#picture").attr("src","images/break.jpg");
+        document.getElementById('picture').src = "images/break.jpg";
       }
       else {
-        $("#picture").attr("src","images/working.jpg");
+        document.getElementById('picture').src = "images/working.jpg";
       }
+
       var btnStop = document.getElementById("stopButton");
 
+      //while running disable the start button, enable the stop button
       document.getElementById("startButton").disabled = true;
       document.getElementById("stopButton").disabled = false;
 
+      //timer interval to update the clock every second
       var timer = setInterval(function() {
 
-
+        //edit HTML for clock to get proper reading with zeroes as place holders
         if (minutes >= 10 && seconds >=10) {
           document.getElementById("clock").innerHTML = minutes + ":" + seconds;
           document.title = "(" + minutes + ":" + seconds + ") Pomodoro Productivity";
@@ -110,6 +115,7 @@
           document.title = "(0" + minutes + ":0" + seconds + ") Pomodoro Productivity";
         }
 
+        //clock logic - decreasing seconds and/or minutes
         if (seconds > 0) {
           seconds--;
         }
@@ -118,26 +124,28 @@
             minutes--;
             seconds = 59;
           }
+          //timer hits zero - switch between break and work
           else {
             if (!onBreak) {
               minutes = breakTimer;
               onBreak = true;
-              $("#picture").attr("src","images/break.jpg");
+              document.getElementById('picture').src = "images/break.jpg";
             }
             else if (onBreak){
               minutes = workTimer;
               onBreak = false;
-              $("#picture").attr("src","images/working.jpg");
+              document.getElementById('picture').src = "images/working.jpg";
             }
           }
         }
       }, 1000);
 
+      //stop the timer, change the picture and enable/disable buttons
       btnStop.onclick = function () {
         document.getElementById("startButton").disabled = false;
         document.getElementById("stopButton").disabled = true;
         clearInterval(timer);
-        $("#picture").attr("src","images/pause.jpg");
+        document.getElementById('picture').src = "images/pause.jpg";
         document.getElementById('breakTimerLess').disabled = false;
         document.getElementById('breakTimerMore').disabled = false;
         document.getElementById('workTimerLess').disabled = false;
@@ -151,7 +159,7 @@
     <div class="container-fluid"> <!-- Beginning of Container -->
       <div class="row">
         <div class="col-xs-12">
-          <table class="text-center">
+          <table class="text-center"> <!-- Beginning of Table -->
             <tbody>
               <tr>
                 <td colspan=6 id="clock">25:00</td>
@@ -179,7 +187,7 @@
                 <td id="wikiLink" colspan=6>If you want to read more about the Pomodoro Technique, click <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">HERE</a>.</td>
               </tr>
             </tbody>
-          </table>
+          </table> <!-- End of Table -->
         </div>
       </div>
     </div> <!-- End of Container -->
