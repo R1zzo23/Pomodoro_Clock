@@ -129,12 +129,22 @@
             if (!onBreak) {
               minutes = breakTimer;
               onBreak = true;
+<<<<<<< HEAD
               document.getElementById('picture').src = "images/break.jpg";
+=======
+              $("#picture").attr("src","images/break.jpg");
+              timerBeep();
+>>>>>>> f4d2ee9c199f09749786be4862e18d6ba7540ac8
             }
             else if (onBreak){
               minutes = workTimer;
               onBreak = false;
+<<<<<<< HEAD
               document.getElementById('picture').src = "images/working.jpg";
+=======
+              $("#picture").attr("src","images/working.jpg");
+              timerBeep();
+>>>>>>> f4d2ee9c199f09749786be4862e18d6ba7540ac8
             }
           }
         }
@@ -152,6 +162,11 @@
         document.getElementById('workTimerMore').disabled = false;
       }
     }
+
+    function timerBeep() {
+  		document.getElementById( 'timer-beep' ).play();
+    }
+
     </script>
   </head>
 
@@ -191,5 +206,9 @@
         </div>
       </div>
     </div> <!-- End of Container -->
+    <audio id="timer-beep">
+      <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/41203/beep.mp3"/>
+      <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/41203/beep.ogg" />
+    </audio>
   </body>
 </html>
