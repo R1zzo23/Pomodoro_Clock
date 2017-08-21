@@ -129,22 +129,19 @@
             if (!onBreak) {
               minutes = breakTimer;
               onBreak = true;
-<<<<<<< HEAD
+
               document.getElementById('picture').src = "images/break.jpg";
-=======
+
               $("#picture").attr("src","images/break.jpg");
               timerBeep();
->>>>>>> f4d2ee9c199f09749786be4862e18d6ba7540ac8
             }
             else if (onBreak){
               minutes = workTimer;
               onBreak = false;
-<<<<<<< HEAD
+
               document.getElementById('picture').src = "images/working.jpg";
-=======
               $("#picture").attr("src","images/working.jpg");
               timerBeep();
->>>>>>> f4d2ee9c199f09749786be4862e18d6ba7540ac8
             }
           }
         }
