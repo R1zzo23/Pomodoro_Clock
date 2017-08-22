@@ -88,7 +88,9 @@
         document.getElementById('picture').src = "images/working.jpg";
       }
 
+      //create local variables to use for .click functions
       var btnStop = document.getElementById("stopButton");
+      var btnReset = document.getElementById("resetButton");
 
       //while running disable the start button, enable the stop button
       document.getElementById("startButton").disabled = true;
@@ -158,6 +160,17 @@
         document.getElementById('workTimerLess').disabled = false;
         document.getElementById('workTimerMore').disabled = false;
       }
+
+      //reset the timer when reset button is pushed
+      btnReset.onclick = function() {
+        if (onBreak) {
+          minutes = breakTimer;
+        }
+        else {
+          minutes = workTimer;
+        }
+        seconds = 0;
+      }
     }
 
     function timerBeep() {
@@ -189,8 +202,9 @@
                 <td style="width:10%"><button style="width:95%" class="setup" id="workTimerMore" onclick='workTimerMore()'>&#9650;</button></td>
               </tr>
               <tr>
-                <td colspan=3><button style="width:95%" id="startButton" onclick="startTimer()">START</button></td>
-                <td colspan=3><button style="width:95%" id="stopButton">STOP</button></td>
+                <td colspan=2><button style="width:95%" id="startButton" onclick="startTimer()">START</button></td>
+                <td colspan=2><button style="width:95%" id="stopButton">STOP</button></td>
+                <td colspan=2><button style="width:95%" id="resetButton">RESET</button></td>
               </tr>
               <tr>
                 <td colspan=6><img width="350em" height="250em" id="picture" src="images/pause.jpg"/></td>
